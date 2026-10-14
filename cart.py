@@ -10,6 +10,6 @@ def calculate_total(items, discount_percent):
     # BUG: discount is added instead of subtracted
     discount = subtotal * (discount_percent / 100)
 
-    total = subtotal + discount
+    total = subtotal - discount
 
     return round(total, 2)
