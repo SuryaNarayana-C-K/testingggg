@@ -1,20 +1,15 @@
-from cart import calculate_total
+def calculate_total(items, discount_percent):
+    """
+    Calculate the final shopping cart total.
 
+    items: list of dictionaries with a 'price' and 'quantity'
+    discount_percent: percentage discount
+    """
+    subtotal = sum(item["price"] * item["quantity"] for item in items)
 
-def test_cart_without_discount():
-    items = [
-        {"price": 100, "quantity": 2},
-        {"price": 50, "quantity": 1},
-    ]
+    # BUG: discount is added instead of subtracted
+    discount = subtotal * (discount_percent / 100)
 
-    assert calculate_total(items, 0) == 250
+    total = subtotal + discount
 
-
-def test_cart_with_discount():
-    items = [
-        {"price": 100, "quantity": 2},
-        {"price": 50, "quantity": 1},
-    ]
-
-    # 250 - 10% = 225
-    assert calculate_total(items, 10) == 225
+    return round(total, 2)
